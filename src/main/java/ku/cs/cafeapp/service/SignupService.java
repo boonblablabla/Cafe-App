@@ -27,4 +27,8 @@ public class SignupService {
 
         repository.save(record);
     }
+
+    public Member getUser(String username) {
+        return repository.findByUsername(username);
+    }
 }
