@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class SignupService {
 
-    @Autowired private MemberRepository repository;
+    @Autowired private MemberRepository memberRepository;
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private ModelMapper modelMapper;
 
     public boolean isUsernameAvailable(String username) {
-        return repository.findByUsername(username) == null;
+        return memberRepository.findByUsername(username) == null;
     }
 
     public void createUser(SignUpRequest user) {
@@ -26,10 +26,10 @@ public class SignupService {
         String hashPassword = passwordEncoder.encode(user.getPassword());
         record.setPassword(hashPassword);
 
-        repository.save(record);
+        memberRepository.save(record);
     }
 
     public Member getUser(String username) {
-        return repository.findByUsername(username);
+        return memberRepository.findByUsername(username);
     }
 }
