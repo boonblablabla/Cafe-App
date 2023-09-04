@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -45,7 +46,6 @@ public class OrderService {
         currentOrderId = record.getId();
     }
 
-
     public void order(UUID menuId, AddCartRequest request) {
         if (currentOrderId == null)
             createNewOrder();
@@ -61,5 +61,19 @@ public class OrderService {
         item.setMenu(menu);
         item.setQuantity(request.getQuantity());
         itemRepository.save(item);
+    }
+
+    public List<PurchaseOrder> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    public PurchaseOrder getById(UUID id) {
+        return orderRepository.findById(id).get();
+    }
+    
+    public void finishOrder(UUID orderId) {
+        PurchaseOrder record = orderRepository.findById(orderId).get();
+        record.setStatus(Status.FINISH);
+        orderRepository.save(record);
     }
 }
