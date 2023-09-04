@@ -19,12 +19,22 @@ public class PurchaseOrder {
     @GeneratedValue
     private UUID id;
 
-
     private LocalDateTime timestamp;
     private Status status;
 
 
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderItem> items = new ArrayList<>();
-}
+    private LocalDateTime timestamp;
+    private Status status;
 
+    @OneToMany(mappedBy = "purchaseOrder")
+    private List<OrderItem> items = new ArrayList<>();
+
+    public double getTotal() {
+        double total = 0;
+        for (OrderItem item : items)
+            total += item.getSubtotal();
+        return total;
+    }
+}
