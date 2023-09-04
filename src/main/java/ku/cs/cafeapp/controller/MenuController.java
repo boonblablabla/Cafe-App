@@ -1,6 +1,7 @@
 package ku.cs.cafeapp.controller;
 
 import ku.cs.cafeapp.model.MenuRequest;
+import ku.cs.cafeapp.service.CategoryService;
 import ku.cs.cafeapp.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,15 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/menus")
 public class MenuController {
     @Autowired private MenuService menuService;
+    @Autowired private CategoryService categoryService;
 
     @GetMapping
     public String getAllMenus(Model model) {
-        model.addAttribute("menus", menuService.getAllMenus());
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "menu-all";
     }
 
     @GetMapping("/add")
     public String getMenuForm(Model model) {
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "menu-add";
     }
 
