@@ -5,12 +5,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Entity
 public class Member {
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
 
     private String username;
     private String password;
