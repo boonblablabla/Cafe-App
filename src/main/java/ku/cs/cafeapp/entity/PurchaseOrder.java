@@ -22,12 +22,6 @@ public class PurchaseOrder {
     private LocalDateTime timestamp;
     private Status status;
 
-
-    @OneToMany(mappedBy = "purchaseOrder")
-    private List<OrderItem> items = new ArrayList<>();
-    private LocalDateTime timestamp;
-    private Status status;
-
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderItem> items = new ArrayList<>();
 
