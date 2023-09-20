@@ -29,7 +29,7 @@ public class OrderController {
         return "home";
     }
 
-    @PostMapping("/(menuId)")
+    @PostMapping("/{menuId}")
     public String order(@PathVariable UUID menuId,
                         @ModelAttribute AddCartRequest request, Model model) {
         orderService.order(menuId, request);
