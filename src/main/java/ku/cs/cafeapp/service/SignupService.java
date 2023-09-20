@@ -21,7 +21,7 @@ public class SignupService {
 
     public void createUser(SignUpRequest user) {
         Member record = modelMapper.map(user, Member.class);
-        record.setRole("USER");
+        record.setRole("ROLE_USER");
 
         String hashPassword = passwordEncoder.encode(user.getPassword());
         record.setPassword(hashPassword);
